@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.7.1)
+set (CMAKE_CXX_STANDARD 11)
 project(boxy)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)

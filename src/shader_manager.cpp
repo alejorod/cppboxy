@@ -89,10 +89,10 @@ GLuint glh::ShaderManager::load(std::string vertex_path, std::string fragment_pa
     std::cout << "DONE!" << std::endl;
   }
 
-  // glDetachShader(program_id, vertex_id);
-	// glDetachShader(program_id, fragment_id);
-	// glDeleteShader(vertex_id);
-	// glDeleteShader(fragment_id);
+  glDetachShader(program_id, vertex_id);
+	glDetachShader(program_id, fragment_id);
+	glDeleteShader(vertex_id);
+	glDeleteShader(fragment_id);
 
   return program_id;
 }

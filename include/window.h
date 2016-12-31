@@ -4,6 +4,7 @@
 #include <string>
 #include <SDL.h>
 #include <GL/glew.h>
+#include <buffer_manager.h>
 
 namespace glh
 {
@@ -12,7 +13,6 @@ class Window
 {
 protected:
   SDL_Window *window;
-  SDL_GLContext context;
 
 public:
   const static Uint32 SHOWN = SDL_WINDOW_SHOWN;
@@ -23,7 +23,7 @@ public:
 
   void swap();
   void clear();
-  void draw(GLuint, GLuint);
+  SDL_GLContext create_context();
 };
 
 }
