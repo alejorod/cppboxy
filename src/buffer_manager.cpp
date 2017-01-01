@@ -22,6 +22,7 @@ GLuint glh::BufferManager::create(GLfloat* data)
      NULL                // array buffer offset
   );
 
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
 
   return vao_id;

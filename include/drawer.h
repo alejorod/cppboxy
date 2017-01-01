@@ -1,17 +1,13 @@
-#ifndef GLH_DRAWABLE
-#define GLH_DRAWABLE
+#ifndef GLH_DRAWER
+#define GLH_DRAWER
 
 #include <window.h>
+#include <camera.h>
+#include <drawable.h>
 #include <SDL.h>
 #include <GL/glew.h>
 
 namespace glh {
-
-struct Drawable {
-  GLuint shader;
-  GLuint vao;
-  int count;
-};
 
 class Drawer
 {
@@ -20,12 +16,12 @@ private:
   SDL_GLContext context;
 
 public:
-  Drawer(glh::Window &window);
+  Drawer(glh::Window&);
   ~Drawer();
 
   void clear();
   void swap();
-  void draw(Drawable);
+  void draw(Camera&, Drawable);
 
   static Drawable create_drawable(GLuint shader_id, GLuint vao_id, int count)
   {
