@@ -17,8 +17,8 @@ int main()
   camera.translate(0.0, 0.0, 4.0);
 
   GLuint shader = glh::ShaderManager::load("vertex_shader.glsl", "fragment_shader.glsl");
-  GLuint traingle_vao = glh::BufferManager::create(glh::primitives::triangle);
-  glh::Drawable triangle = glh::Drawer::create_drawable(shader, traingle_vao, 3);
+  GLuint traingle_vao = glh::BufferManager::create(glh::primitives::cube);
+  glh::Drawable triangle = glh::Drawer::create_drawable(shader, traingle_vao, 6 * 2 * 3);
 
   bool run = true;
   float count = 0.0f;

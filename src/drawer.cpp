@@ -2,6 +2,8 @@
 #include <buffer_manager.h>
 #include <shader_manager.h>
 
+#include <iostream>
+
 glh::Drawer::Drawer(glh::Window &win)
 : window(win)
 {
@@ -26,7 +28,6 @@ void glh::Drawer::swap()
 
 void glh::Drawer::draw(glh::Camera &camera, glh::Drawable drawable)
 {
-
   glm::mat4 projection_matrix = camera.get_projection_matrix();
   glm::mat4 view_matrix = camera.get_view_matrix();
   glm::mat4 model_matrix = drawable.get_model_matrix();

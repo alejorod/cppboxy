@@ -1,6 +1,6 @@
 #include <buffer_manager.h>
 
-GLuint glh::BufferManager::create(GLfloat* data)
+GLuint glh::BufferManager::create(std::vector<GLfloat> data)
 {
   GLuint vao_id;
   glGenVertexArrays(1, &vao_id);
@@ -9,7 +9,7 @@ GLuint glh::BufferManager::create(GLfloat* data)
   GLuint buffer_id;
   glGenBuffers(1, &buffer_id);
   glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 3 * 3, data, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * data.size(), &data.front(), GL_STATIC_DRAW);
 
   glEnableVertexAttribArray(0);
 
