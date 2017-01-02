@@ -9,7 +9,7 @@
 int main()
 {
   glh::GLH env;
-  glh::Window window { "demo", 200, 200, 800, 600, glh::Window::SHOWN };
+  glh::Window window { "demo", 200, 200, 800, 600, glh::Window::SHOWN | glh::Window::OPENGL };
   glh::Drawer drawer { window };
   glh::Camera camera { 45.0f, 800.0f / 600.0f, 0.1f, 100.0f };
   glh::Event event;
