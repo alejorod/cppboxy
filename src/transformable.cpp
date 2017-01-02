@@ -33,7 +33,7 @@ glm::mat4 glh::Transformable::get_rotation_matrix()
   glm::mat4 yaw_matrix = glm::rotate(glm::radians(yaw), glm::vec3(0.0f, 1.0f, 0.0f));
   glm::mat4 roll_matrix = glm::rotate(glm::radians(roll), glm::vec3(0.0f, 0.0f, 1.0f));
 
-  return pitch_matrix * yaw_matrix * roll_matrix;
+  return yaw_matrix * pitch_matrix * roll_matrix;
 }
 
 glm::mat4 glh::Transformable::get_inverse_rotation_matrix()
@@ -42,7 +42,7 @@ glm::mat4 glh::Transformable::get_inverse_rotation_matrix()
   glm::mat4 yaw_matrix = glm::rotate(glm::radians(-yaw), glm::vec3(0.0f, 1.0f, 0.0f));
   glm::mat4 roll_matrix = glm::rotate(glm::radians(-roll), glm::vec3(0.0f, 0.0f, 1.0f));
 
-  return  pitch_matrix * yaw_matrix * roll_matrix;
+  return pitch_matrix * yaw_matrix * roll_matrix;
 }
 
 glm::mat4 glh::Transformable::get_model_matrix()

@@ -21,8 +21,8 @@ glm::mat4 glh::Camera::get_view_matrix()
 
 void glh::Camera::update()
 {
-  glm::vec4 f_dir { 0, 0, -1, 0 };
-  glm::vec4 l_dir { -1, 0, 0, 0 };
+  glm::vec4 f_dir { 0.0f, 0.0f, -1.0f, 1.0f };
+  glm::vec4 l_dir { -1.0f, 0.0f, 0.0f, 1.0f };
 
   if (glh::keyboard::is_pressed(glh::keyboard::LEFT)) {
     rotate(0.0f, 5.0f, 0.0f);
