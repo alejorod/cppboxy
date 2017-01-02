@@ -8,6 +8,9 @@ glh::Drawer::Drawer(glh::Window &win)
 : window(win)
 {
   context = window.create_context();
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LESS);
+  glEnable(GL_CULL_FACE);
   glewInit();
 }
 

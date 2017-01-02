@@ -14,18 +14,15 @@ int main()
   glh::Camera camera { 45.0f, 800.0f / 600.0f, 0.1f, 100.0f };
   glh::Event event;
 
-  camera.translate(0.0, 0.0, 4.0);
-
   GLuint shader = glh::ShaderManager::load("vertex_shader.glsl", "fragment_shader.glsl");
   GLuint traingle_vao = glh::BufferManager::create(glh::primitives::cube);
   glh::Drawable triangle = glh::Drawer::create_drawable(shader, traingle_vao, 6 * 2 * 3);
 
   bool run = true;
-  float count = 0.0f;
+  float count = 1.0f;
 
   while(run)
   {
-    count += 0.001f;
     while(glh::poll_event(&event))
     {
       if (event.type == glh::events::quit)
@@ -34,8 +31,7 @@ int main()
       }
     }
 
-    triangle.rotate_y(count * 30);
-    camera.translate(0.0f, 0.0f, count);
+    camera.update();
 
     drawer.clear();
     drawer.draw(camera, triangle);

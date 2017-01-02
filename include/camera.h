@@ -16,6 +16,7 @@ public:
   Camera(float, float, float, float);
   glm::mat4 get_projection_matrix();
   glm::mat4 get_view_matrix();
+  void update();
 };
 }
 

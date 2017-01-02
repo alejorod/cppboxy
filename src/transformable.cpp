@@ -20,30 +20,29 @@ void glh::Transformable::scale(float x, float y, float z)
   sz += z;
 }
 
-void glh::Transformable::rotate_x(float angle)
+void glh::Transformable::rotate(float p_angle, float y_angle, float r_angle)
 {
-  pitch += angle;
-}
-
-void glh::Transformable::rotate_y(float angle)
-{
-  yaw += angle;
+  pitch += p_angle;
+  yaw += y_angle;
+  roll += r_angle;
 }
 
 glm::mat4 glh::Transformable::get_rotation_matrix()
 {
-  glm::mat4 matrix_pitch = glm::rotate(glm::radians(pitch), glm::vec3(1.0f, 0.0f, 0.0f));
-  glm::mat4 matrix_yaw = glm::rotate(glm::radians(yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+  glm::mat4 pitch_matrix = glm::rotate(glm::radians(pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+  glm::mat4 yaw_matrix = glm::rotate(glm::radians(yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+  glm::mat4 roll_matrix = glm::rotate(glm::radians(roll), glm::vec3(0.0f, 0.0f, 1.0f));
 
-  return matrix_pitch * matrix_yaw;
+  return pitch_matrix * yaw_matrix * roll_matrix;
 }
 
 glm::mat4 glh::Transformable::get_inverse_rotation_matrix()
 {
-  glm::mat4 matrix_pitch = glm::rotate(glm::radians(-pitch), glm::vec3(1.0f, 0.0f, 0.0f));
-  glm::mat4 matrix_yaw = glm::rotate(glm::radians(-yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+  glm::mat4 pitch_matrix = glm::rotate(glm::radians(-pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+  glm::mat4 yaw_matrix = glm::rotate(glm::radians(-yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+  glm::mat4 roll_matrix = glm::rotate(glm::radians(-roll), glm::vec3(0.0f, 0.0f, 1.0f));
 
-  return matrix_pitch * matrix_yaw;
+  return  pitch_matrix * yaw_matrix * roll_matrix;
 }
 
 glm::mat4 glh::Transformable::get_model_matrix()
@@ -59,5 +58,5 @@ glm::mat4 glh::Transformable::get_inverse_model_matrix()
   glm::mat4 translation_matrix = glm::translate(glm::vec3(-tx, -ty, -tz));
   glm::mat4 scale_matrix = glm::scale(glm::vec3(1.0f / sx, 1.0f / sy, 1.0f / sz));
 
-  return translation_matrix * get_inverse_rotation_matrix() * scale_matrix;
+  return scale_matrix * get_inverse_rotation_matrix() * translation_matrix;
 }
