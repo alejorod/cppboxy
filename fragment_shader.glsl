@@ -1,7 +1,7 @@
 #version 330 core
-in vec4 pos;
-out vec4 color;
+in vec4 color;
+out vec4 frag_color;
 
 void main(){
-  color = pos;
+  frag_color = color;
 }

@@ -3,7 +3,7 @@
 #include <glm/gtx/transform.hpp>
 
 glh::Transformable::Transformable()
-: tx(0.0f), ty(0.0f), tz(0.0f), sx(1.0f), sy(1.0f), sz(1.0f), pitch(0.0f), yaw(0.0f)
+: tx(0.0f), ty(0.0f), tz(0.0f), sx(1.0f), sy(1.0f), sz(1.0f), pitch(0.0f), yaw(0.0f), roll(0.0f)
 {}
 
 void glh::Transformable::translate(float x, float y, float z)

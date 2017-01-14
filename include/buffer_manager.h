@@ -7,10 +7,18 @@
 namespace glh
 {
 
+struct InterleavedBufferData
+{
+  std::vector<GLfloat> vertexs;
+  std::vector<unsigned int> indexes;
+  int stride;
+};
+
 class BufferManager
 {
 public:
-  static GLuint create(std::vector<GLfloat> data);
+  static GLuint create(std::vector<GLfloat>, std::vector<GLfloat>, std::vector<unsigned int>, std::vector<GLfloat>);
+  static GLuint create(InterleavedBufferData);
   static void bind(GLuint);
 };
 

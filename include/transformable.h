@@ -8,7 +8,7 @@ namespace glh
 
 class Transformable
 {
-private:
+protected:
   float tx, ty, tz;
   float sx, sy, sz;
   float pitch, yaw, roll;
