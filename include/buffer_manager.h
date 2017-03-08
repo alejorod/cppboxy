@@ -17,7 +17,6 @@ struct InterleavedBufferData
 class BufferManager
 {
 public:
-  static GLuint create(std::vector<GLfloat>, std::vector<GLfloat>, std::vector<unsigned int>, std::vector<GLfloat>);
   static GLuint create(InterleavedBufferData);
   static void bind(GLuint);
 };

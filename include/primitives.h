@@ -141,8 +141,20 @@ const std::vector<GLfloat> cube_normals = {
 };
 
 const std::vector<unsigned int> cube_indexes = {
+  // top face
   0, 1, 2,
   0, 2, 3,
+//
+//   3, 1, 2
+//   3, 0, 1
+//
+//   -0.5, 0.5, -0.5,
+//   -0.5, 0.5, 0.5,
+//   0.5, 0.5, 0.5,
+//   0.5, 0.5, -0.5,
+//
+// 03
+// 12
 
   5, 4, 6,
   6, 4, 7,
@@ -150,6 +162,7 @@ const std::vector<unsigned int> cube_indexes = {
   8, 9, 10,
   8, 10, 11,
 
+  // front face
   13, 12, 14,
   15, 14, 12,
 

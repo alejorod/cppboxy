@@ -3,6 +3,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 
+const float speed = 2.0f;
+
 glh::Camera::Camera(float radians, float ratio, float near, float far)
 {
   projection_matrix = glm::perspective(glm::radians(radians), ratio, near, far);
@@ -40,8 +42,8 @@ void glh::Camera::update()
     rotate(-5.0f, 0.0f, 0.0f);
   }
 
-  f_dir = glm::normalize(get_rotation_matrix() * f_dir) * 10.0f;
-  l_dir = glm::normalize(get_rotation_matrix() * l_dir) * 10.0f;
+  f_dir = glm::normalize(get_rotation_matrix() * f_dir) * speed;
+  l_dir = glm::normalize(get_rotation_matrix() * l_dir) * speed;
 
   if (glh::keyboard::is_pressed(glh::keyboard::S)) {
     translate(-f_dir[0], -f_dir[1], -f_dir[2]);

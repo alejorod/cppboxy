@@ -6,6 +6,11 @@ glh::Transformable::Transformable()
 : tx(0.0f), ty(0.0f), tz(0.0f), sx(1.0f), sy(1.0f), sz(1.0f), pitch(0.0f), yaw(0.0f), roll(0.0f)
 {}
 
+std::vector<int> glh::Transformable::get_position()
+{
+  return { (int) tx, (int) ty, (int) tz };
+}
+
 void glh::Transformable::translate(float x, float y, float z)
 {
   tx += x;

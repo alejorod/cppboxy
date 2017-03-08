@@ -6,36 +6,13 @@
 #include <buffer_manager.h>
 #include <drawer.h>
 #include <voxel_chunk.h>
+#include <world.h>
 
 #include <iostream>
 #include <PerlinNoise.h>
 
 #include <algorithm>
 
-std::vector<std::vector<int>> generate_world()
-{
-  PerlinNoise pn;
-  int size = 300;
-  int w_size = 200;
-  std::vector<std::vector<int>> w;
-  w.resize(w_size);
-
-  for (int i = 0; i < w.size(); i++) {
-    w[i].resize(w_size);
-    for (int j = 0; j < w[i].size(); j++) {
-      double x = (double) j / (double) (size);
-      double y = (double) i / (double) (size);
-
-      double n = std::abs(pn.noise(x, y, 0))
-                + 0.5 * std::abs(pn.noise(2 * x, 2 * y, 0))
-                + 0.25 * std::abs(pn.noise(4 * x, 2 * y, 0));
-
-      w[i][j] = (int) floor(n * size / 2);
-
-    }
-  }
-  return w;
-}
 
 int main()
 {
@@ -44,13 +21,11 @@ int main()
   glh::Drawer drawer { window };
   glh::Camera camera { 45.0f, 800.0f / 600.0f, 0.1f, 1000.0f };
   glh::Event event;
+  glh::World world { 8, 16, 100 * 10, 300 };
 
   GLuint shader = glh::ShaderManager::load("vertex_shader.glsl", "fragment_shader.glsl");
-  glh::VoxelChunk voxel_chunk;
-  voxel_chunk.set_chunk_data(generate_world());
-  glh::InterleavedBufferData buffer_data = voxel_chunk.get_buffer_data();
-  GLuint vao = glh::BufferManager::create(buffer_data);
-  glh::Drawable triangle = glh::Drawer::create_drawable(shader, vao, buffer_data.indexes.size());
+
+  glh::Drawer::set_default_shader(shader);
 
   bool run = true;
   float count = 1.0f;
@@ -66,9 +41,14 @@ int main()
     }
 
     camera.update();
-
+    world.update(camera);
     drawer.clear();
-    drawer.draw(camera, triangle);
+
+    for(auto b: world.get_drawables(camera))
+    {
+      drawer.draw(camera, b);
+    }
+
     drawer.swap();
   }
 

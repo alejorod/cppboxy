@@ -23,7 +23,7 @@ public:
   void set_position(int, int, int);
   void set_color(float, float, float);
   void occlude(std::vector<Voxel>);
-  bool similar_coords(int, int, int);
+  std::vector<int> get_position();
   std::vector<GLfloat> get_vertices_data();
   std::vector<GLfloat> get_colors_data();
   std::vector<GLfloat> get_normals_data();

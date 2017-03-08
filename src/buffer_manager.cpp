@@ -1,71 +1,5 @@
 #include <buffer_manager.h>
 
-GLuint glh::BufferManager::create(std::vector<GLfloat> position, std::vector<GLfloat> color, std::vector<unsigned int> indexes, std::vector<GLfloat> light)
-{
-  GLuint vao_id;
-  glGenVertexArrays(1, &vao_id);
-  glBindVertexArray(vao_id);
-
-  GLuint position_buffer_id;
-  glGenBuffers(1, &position_buffer_id);
-  glBindBuffer(GL_ARRAY_BUFFER, position_buffer_id);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * position.size(), &position.front(), GL_STATIC_DRAW);
-
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(
-     0,
-     3,
-     GL_FLOAT,
-     GL_FALSE,
-     0,
-     NULL
-  );
-
-  GLuint color_buffer_id;
-  glGenBuffers(1, &color_buffer_id);
-  glBindBuffer(GL_ARRAY_BUFFER, color_buffer_id);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * color.size(), &color.front(), GL_STATIC_DRAW);
-
-  glEnableVertexAttribArray(1);
-  glVertexAttribPointer(
-     1,
-     3,
-     GL_FLOAT,
-     GL_FALSE,
-     0,
-     NULL
-  );
-
-  GLuint light_buffer_id;
-  glGenBuffers(1, &light_buffer_id);
-  glBindBuffer(GL_ARRAY_BUFFER, light_buffer_id);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * light.size(), &light.front(), GL_STATIC_DRAW);
-
-  glEnableVertexAttribArray(2);
-  glVertexAttribPointer(
-     2,
-     1,
-     GL_FLOAT,
-     GL_FALSE,
-     0,
-     NULL
-  );
-
-  GLuint index_buffer;
-  glGenBuffers(1, &index_buffer);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexes.size() * sizeof(unsigned int), &indexes.front(), GL_STATIC_DRAW);
-
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindVertexArray(0);
-  glDeleteBuffers(1, &position_buffer_id);
-  glDeleteBuffers(1, &color_buffer_id);
-  glDeleteBuffers(1, &light_buffer_id);
-  glDeleteBuffers(1, &index_buffer);
-
-  return vao_id;
-}
-
 GLuint glh::BufferManager::create(InterleavedBufferData data)
 {
   GLuint vao_id;
@@ -110,6 +44,16 @@ GLuint glh::BufferManager::create(InterleavedBufferData data)
   glEnableVertexAttribArray(3);
   glVertexAttribPointer(
      3,
+     1,
+     GL_FLOAT,
+     GL_FALSE,
+     data.stride * sizeof(GLfloat),
+     (GLvoid*) (9 * sizeof(GLfloat))
+  );
+
+  glEnableVertexAttribArray(4);
+  glVertexAttribPointer(
+     4,
      1,
      GL_FLOAT,
      GL_FALSE,

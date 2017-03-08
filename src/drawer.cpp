@@ -1,6 +1,9 @@
 #include <drawer.h>
 #include <buffer_manager.h>
 #include <shader_manager.h>
+#include <iostream>
+
+GLuint glh::Drawer::default_shader = 0;
 
 glh::Drawer::Drawer(glh::Window &win)
 : window(win)
@@ -39,11 +42,21 @@ void glh::Drawer::draw(glh::Camera &camera, glh::Drawable drawable)
   GLuint mvp_location = glGetUniformLocation(drawable.shader, "MVP");
   glUniformMatrix4fv(mvp_location, 1, GL_FALSE, &mvp[0][0]);
 
+  // std::cout << drawable.count << std::endl;
+
   glDrawElements(
-     GL_TRIANGLES,
-     drawable.count,
-     GL_UNSIGNED_INT,
-     0
- );
+    GL_TRIANGLES,
+    drawable.count,
+    GL_UNSIGNED_INT,
+    0
+  );
+
+  // glDrawElements(
+  //   GL_LINES,
+  //   drawable.count,
+  //   GL_UNSIGNED_INT,
+  //   0
+  // );
+
   // glDrawArrays(GL_TRIANGLES, 0, drawable.count);
 }

@@ -13,6 +13,7 @@ public:
   GLuint vao;
   int count;
 
+  Drawable();
   Drawable(GLuint, GLuint, int);
 };
 
